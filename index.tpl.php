@@ -8,7 +8,7 @@
   include($dirname . '/template.class.php');
 ?>
 <?php include($dirname . '/_includes/meta-header.php'); ?>
-<title>miroPHP</title>
+<title>microPHP</title>
 </head>
 <body>
 <?php include($dirname . '/_includes/site-header.php'); ?>
