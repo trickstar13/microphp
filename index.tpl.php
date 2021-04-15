@@ -15,7 +15,7 @@
 
 <main class="main-area">
   <div class="main-box">
-    <h1>miroPHP</h1>
+    <h1>microPHP</h1>
     <h2>お知らせ</h2>
     <?php
     $template = new template();
