@@ -1,3 +1,6 @@
+# お知らせ一覧で 403 Forbidden が出る時は下記を有効にすると動くかもしれない
+# DirectoryIndex index.php index.html index.cgi /index.php
+
 <IfModule mod_rewrite.c>
 RewriteEngine On
 RewriteCond %{REQUEST_FILENAME} !-f
