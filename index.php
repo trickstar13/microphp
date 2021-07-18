@@ -86,6 +86,13 @@ path_route(array(
   array('GET', '/news/', function () {
     include('./news/index.tpl.php');
   }),
+  // 記事URL末尾スラッシュありでアクセスできるようにする場合
+  /*
+   array('GET', '/news/:id/', function ($params) {
+    include('./news/pages.tpl.php');
+  }),
+   */
+  // 記事を返す
   array('GET', '/news/:id', function ($params) {
     include('./news/pages.tpl.php');
   }),
