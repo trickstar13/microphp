@@ -47,13 +47,18 @@ class template
    **************************************
    */
 
-  public function getArticle($api = 'news', $id = null)
+  public function getArticle($api = 'news', $id = null, $draftKey = null)
   {
     // APIを指定
     $param = $api . '/';
 
     // 記事IDを指定
     $param = $param . $id;
+
+    // 下書きの場合はdraftKey指定
+    if ($draftKey){
+      $param = $param . '?draftKey=' .$draftKey;
+    }
 
     // JSONデータを取得、返す
     return $this->getJsonFromApi($param);

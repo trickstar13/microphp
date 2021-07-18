@@ -9,8 +9,12 @@ function path_info()
   if (isset($_SERVER['PATH_INFO'])) {
     return $_SERVER['PATH_INFO'];
   } else if (isset($_SERVER['REQUEST_URI'], $_SERVER['SCRIPT_NAME'])) {
-    $url = parse_url('http://tk.pentaprogram.tokyo' . $_SERVER['REQUEST_URI']);
-    if ($url === false) return false;
+
+    // 指定URL以外がリクエストされた場合は Return False
+    $url = parse_url('https://microphp.pentaprogram.tokyo' . $_SERVER['REQUEST_URI']);
+    $url2 = parse_url('http://test.pentaprogram.tokyo' . $_SERVER['REQUEST_URI']);
+    if ($url === false && $url2 === false) return false;
+
     return '/' . ltrim(substr($url['path'], strlen(dirname($_SERVER['SCRIPT_NAME']))), '/');
   }
   return false;

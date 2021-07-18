@@ -8,8 +8,11 @@
   include($dirname . './../template.class.php');
   $template = new template();
 
+  // 下書きの場合はdraftkeyを取得
+  $draftKey = $_GET['draftkey'];
+
   // API名と記事IDを指定して ニュース記事を取得
-  $articleData = $template->getArticle('news', $params['id']);
+  $articleData = $template->getArticle('news', $params['id'], $draftKey);
   $template->jsonData = $articleData;
 ?>
 <title><?php echo $template->jsonData['title']; ?> | お知らせ</title>
