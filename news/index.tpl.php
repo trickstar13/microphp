@@ -21,7 +21,9 @@
     $template = new template();
 
     // API名を指定して ニュース記事の一覧 を取得
-    $articleList = $template->getArticleList('news');
+    // 件数を増減する場合：getArticleList('news', 20)
+    // カテゴリーを指定する場合：getArticleList('news', 20, 'カテゴリー名')
+    $articleList = $template->getArticleList('news', 20);
     $template->jsonData = $articleList;
 
     // 記事リストのテンプレートを表示（トップページと共用）

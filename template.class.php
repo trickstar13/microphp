@@ -24,14 +24,17 @@ class template
    *  データ取得（リスト）
    **************************************
    */
-  public function getArticleList($api = 'news' , $category = null, $limit = 10)
+  public function getArticleList($api = 'news' , $limit = 10, $category = null)
   {
 
     // APIを指定
     $param = $api.'?';
 
     // カテゴリー指定：2バイト文字（日本語）名称の場合もあるためURLエンコードする
-    $param = $param . 'category=' . urlencode($category);
+    // ※カテゴリーフィールドのIDがcategoryの場合
+    if ($category) {
+      $param = $param . '&filters=category[contains]' . urlencode($category);
+    }
 
     // 取得件数を指定
     $param = $param . '&limit=' . $limit;
