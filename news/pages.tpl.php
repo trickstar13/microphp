@@ -9,7 +9,7 @@
   $template = new template();
 
   // 下書きの場合はdraftkeyを取得
-  $draftKey = $_GET['draftkey'];
+  $draftKey = $_GET['draftKey'];
 
   // API名と記事IDを指定して ニュース記事を取得
   $articleData = $template->getArticle('news', $params['id'], $draftKey);
