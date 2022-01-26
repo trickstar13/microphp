@@ -1,6 +1,6 @@
 <!doctype html>
 <html lang="ja">
-<head>
+<head prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb# website: http://ogp.me/ns/website#">
 <meta name="viewport" content="width=device-width">
 <meta charset="UTF-8">
 <?php
@@ -25,9 +25,10 @@
     $template->jsonData = $articleList;
 
     // 記事リストのテンプレートを表示
-    $frontpageToc = $dirname . '/_includes/news-list.tpl.php';
-    $template->show($frontpageToc);
+    $newsList = $dirname . '/_includes/news-list.tpl.php';
+    $template->show($newsList);
     ?>
+  </div>
 </main>
 
 <?php include($dirname . '/_includes/site-footer.php'); ?>

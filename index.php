@@ -10,11 +10,9 @@ function path_info()
     return $_SERVER['PATH_INFO'];
   } else if (isset($_SERVER['REQUEST_URI'], $_SERVER['SCRIPT_NAME'])) {
 
-    // 指定URL以外がリクエストされた場合は Return False
-    $url = parse_url('https://microphp.pentaprogram.tokyo' . $_SERVER['REQUEST_URI']);
-    $url2 = parse_url('http://test.pentaprogram.tokyo' . $_SERVER['REQUEST_URI']);
-    if ($url === false && $url2 === false) return false;
-
+    // 公開サイトのURLに書き換える
+    $url = parse_url('https://pentaprogram.cms.am/' . $_SERVER['REQUEST_URI']);
+    if ($url === false) return false;
     return '/' . ltrim(substr($url['path'], strlen(dirname($_SERVER['SCRIPT_NAME']))), '/');
   }
   return false;

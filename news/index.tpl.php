@@ -27,8 +27,8 @@
     $template->jsonData = $articleList;
 
     // 記事リストのテンプレートを表示（トップページと共用）
-    $frontpageToc = $dirname . './../_includes/news-list.tpl.php';
-    $template->show($frontpageToc);
+    $newsList = $dirname . './../_includes/news-list.tpl.php';
+    $template->show($newsList);
 
     ?>
 </main>

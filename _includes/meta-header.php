@@ -1,1 +1,1 @@
-<link rel="stylesheet" href="/css/styles.min.css">
+<link rel="stylesheet" href="/css/style.css">
