@@ -1,34 +1,36 @@
 <?php
 ini_set('display_errors', "On");
 
+// 自分の APIの URL を記入
+const YOUR_DOMAIN = 'php.microcms.io';
+
+// 自分の API-KEY を記入
+const YOUR_API_KEY = '7369999eaded4ab29771673e9df8b08c2ec8';
+
+
 /***************************************
  *  microCMS + PHP
+ *  アレンジ元： PHPとJSONでお手軽に量産型HTMLテンプレートを作ってみた
+ *  http://www.fact-of-life.com/entry/2016/10/11/205137
  **************************************
  */
-
 class template
 {
+  public $jsonData;
 
-  /***************************************
-   *  アレンジ元： PHPとJSONでお手軽に量産型HTMLテンプレートを作ってみた
-   *  http://www.fact-of-life.com/entry/2016/10/11/205137
-   **************************************
-   */
   public function show($tpl_file)
   {
     include("{$tpl_file}");
   }
 
-
   /***************************************
    *  データ取得（リスト）
    **************************************
    */
-  public function getArticleList($api = 'news' , $limit = 10, $category = null)
+  public function getArticleList($api = 'news', $limit = 10, $category = null)
   {
-
     // APIを指定
-    $param = $api.'?';
+    $param = $api . '?';
 
     // カテゴリー指定：2バイト文字（日本語）名称の場合もあるためURLエンコードする
     // ※カテゴリーフィールドのIDがcategoryの場合
@@ -41,15 +43,39 @@ class template
 
     // JSONデータを取得、返す
     return $this->getJsonFromApi($param)["contents"];
-
   }
 
+  /***************************************
+   *  JSONを取得
+   **************************************
+   */
+  private function getJsonFromApi($param)
+  {
+    // 自分の APIの URL を記入
+    $apiUrl = 'https://' . YOUR_DOMAIN . '/api/v1/' . $param;
+
+    // 自分の API-KEY を記入
+    $headerData = array(
+      'X-MICROCMS-API-KEY: ' . YOUR_API_KEY
+    );
+
+    $ch = curl_init($apiUrl);
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+    curl_setopt($ch, CURLOPT_HTTPHEADER, $headerData);
+
+    $response = curl_exec($ch);
+    curl_close($ch);
+    $json = trim($response);
+
+    //【データが表示されない場合】下記の一行のコメントを外してデータを見てみよう
+    // var_dump($json);
+    return json_decode($json, true);
+  }
 
   /***************************************
    *  データ取得（単記事）
    **************************************
    */
-
   public function getArticle($api = 'news', $id = null, $draftKey = null)
   {
     // APIを指定
@@ -59,41 +85,13 @@ class template
     $param = $param . $id;
 
     // 下書きの場合はdraftKey指定
-    if ($draftKey){
-      $param = $param . '?draftKey=' .$draftKey;
+    if ($draftKey) {
+      $param = $param . '?draftKey=' . $draftKey;
     }
 
     // JSONデータを取得、返す
     return $this->getJsonFromApi($param);
   }
-
-
-  /***************************************
-   *  JSONを取得
-   **************************************
-   */
-  private function getJsonFromApi($param)
-  {
-    // 自分の APIの URL を記入
-    $apiUrl = 'https://php.microcms.io/api/v1/' . $param;
-
-    // 自分の API-KEY を記入
-    $headerData = array(
-      'X-API-KEY: e2335d71-1d6f-46cc-831e-fdc758273f79'
-    );
-
-    $ch = curl_init($apiUrl);
-    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-    curl_setopt($ch, CURLOPT_HTTPHEADER, $headerData);
-
-    $response = curl_exec($ch);
-    curl_close($ch);
-
-    $json = trim($response);
-
-    return json_decode($json, true);
-  }
-
 
   /***************************************
    *  UTC を日本時間に変換しつつ整形
@@ -122,10 +120,10 @@ class template
    */
   public function echoCustomRepeat($json, $id, $i)
   {
-    if ($json->jsonData[$id][$i]['richText']) {
+    if (isset($json->jsonData[$id][$i]['richText'])) {
       echo $json->jsonData[$id][$i]['richText'];
     }
-    if ($json->jsonData[$id][$i]['plainText']) {
+    if (isset($json->jsonData[$id][$i]['plainText'])) {
       echo $json->jsonData[$id][$i]['plainText'];
     }
   }
