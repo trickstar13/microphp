@@ -22,6 +22,9 @@ https://pentaprogram.cms.am/
 YOUR_DOMAIN と YOUR_API_KEY をそれぞれ自分のmicroCMSの情報に書き換えます。
 ※サンプルとして作成済みのmicroCMSのAPIのURLとキーが記入されています
 
+### 画面プレビュー設定
+microCMS上の画面プレビュー設定には`https://あなたのドメイン/news/{CONTENT_ID}?draftKey={DRAFT_KEY}`を入力します
+
 ### ルーティング
 `/index.php`にて、該当URLにきた場合のテンプレートをそれぞれ指定しています。  
 この`/index.php`の「公開サイトのURLに書き換える」部分を公開サイトURLに書き換えてください（たいていの場合は書き換えなくても動きますが…）
