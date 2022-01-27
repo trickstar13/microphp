@@ -51,10 +51,7 @@ class template
    */
   private function getJsonFromApi($param)
   {
-    // 自分の APIの URL を記入
     $apiUrl = 'https://' . YOUR_DOMAIN . '/api/v1/' . $param;
-
-    // 自分の API-KEY を記入
     $headerData = array(
       'X-MICROCMS-API-KEY: ' . YOUR_API_KEY
     );
